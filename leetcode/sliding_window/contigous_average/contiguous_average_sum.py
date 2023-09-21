@@ -19,29 +19,32 @@ def average_of_subarray_of_size_k(arr, k):
     
     '''
 
-    Solution 1: 0(n*k)
+    Solution 2: 0(n)
 
         double[] result = new double[arr.length - k + 1];
-        for (int i = 0; i < arr.length - k; i ++) {
-            double sum = 0;
-            for (int j = i; j < i + k; j ++) {
-                    sum += arr[j];
-                }
-            result[i] = sum / k;
+        double windowSum = 0;
+        int position = 0;
+        for ( int i = 0; i < arr.length; i ++) {
+            windowSum += arr[i];
+
+            if ( i >= k - 1) {
+            result[position] = windowSum/k;
+            windowSum -= arr[position]
+            position ++;
+            }    
         }
+
         return result;
     '''
     results = [] # [arr.length - K + 1]    
-    
-    for i, v in enumerate(arr[:k]):
-        sum = 0
-        results.append([])
-        
-        for j, value in enumerate(arr[i:i+k]):
-            sum += value
-        avr = sum / k
-            
-        results[i] = avr
+    position = 0
+    window_sum = 0
+    for i,v in enumerate(arr):
+        window_sum += arr[i]
+        if i >= (k - 1):
+            results.append(window_sum/k)
+            window_sum -= arr[position]
+            position += 1
     return results
 
 print(average_of_subarray_of_size_k([1, 3, 2, 6, -1, 4, 1, 8,2], 5))
