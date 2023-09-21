@@ -1,7 +1,8 @@
 target = 999
 def multiples_sum(n):
 	"""
-	this function gives the multiples of 3 and 5 and adds them together
+	this function gives the multiples of n 
+	and adds them together
 	"""
 	p = target//n
 	return n*(p * (p+1))/2
